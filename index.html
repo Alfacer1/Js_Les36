@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="ua">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Магазин телефонів</title>
+    <style>
+        body {
+            font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif, sans-serif;
+            display: flex;
+            background-color: beige;
+        }
+
+        #categories {
+            width: 20%;
+            border-right: 1px solid #702d2d;
+            padding: 15px;
+        }
+
+        #products {
+            width: 50%;
+            padding: 10px;
+        }
+
+        #product-info {
+            width: 30%;
+            padding: 10px;
+        }
+
+        #btn{
+            background-color: #68e128;
+            color: #0f0f12;
+            padding: 10px;
+            border-radius: 5%;
+            font-size: 20px;
+        }
+
+        #btn:hover{
+            background-color: #28c5e1;
+            color: #0f0f12;
+            padding: 10px;
+            border-radius: 5%;
+            font-size: 20px;
+        }
+    </style>
+</head>
+<body>
+
+<div id="categories">
+    <h2>Категорії</h2>
+    <ul id="category-list">
+        <li onclick="showProducts('category1')">Samsung</li>
+        <li onclick="showProducts('category2')">Apple</li>
+        <li onclick="showProducts('category3')">Xiaomi</li>
+    </ul>
+</div>
+
+<div id="products">
+    <h2>Товари</h2>
+    <ul id="product-list"></ul>
+</div>
+
+<div id="product-info">
+    <h2>Інформація про товар</h2>
+    <div id="info-content"></div>
+</div>
+<script>
+
+    const categories = {
+        category1: [
+            { id: 1, name: 'Samsung Galaxy S23 Ultra', price: 55999 },
+            { id: 2, name: 'Samsung Galaxy Fold 5', price: 86999 },
+            { id: 3, name: 'Samsung Galaxy Flip 5', price: 46999 },
+            { id: 4, name: 'Samsung Galaxy S23', price: 37999 },
+            { id: 5, name: 'Samsung Galaxy S22', price: 24599 },
+            { id: 6, name: 'Samsung Galaxy S21 FE', price: 20499 }
+        ],
+        category2: [
+            { id: 7, name: 'Apple iPhone 15 Pro', price: 78499 },
+            { id: 8, name: 'Apple iPhone 14 Pro Max', price: 77499 },
+            { id: 9, name: 'Apple iPhone 15', price: 57499 },
+            { id: 10, name: 'Apple iPhone 15 Plus', price: 47499 },
+            { id: 11, name: 'Apple iPhone 14 Plus', price: 46999 },
+            { id: 12, name: 'Apple iPhone 13', price: 39999 },
+        ],
+        category3: [
+            { id: 13, name: 'Xiaomi Mix Fold 2', price: 70099 },
+            { id: 14, name: 'Xiaomi 13 Ultra', price: 57258 },
+            { id: 15, name: 'Xiaomi 13 Pro', price: 45174 },
+            { id: 16, name: 'Xiaomi 13T Pro', price: 31909 },
+            { id: 17, name: 'Xiaomi 13', price: 30101 },
+            { id: 18, name: 'Xiaomi 12 Pro', price: 29843 },
+        ],
+    };
+
+function showProducts(category) {
+    const productList = document.getElementById('product-list');
+    const products = categories[category];
+
+    productList.innerHTML = '';
+
+    products.forEach(product => {
+        const listItem = document.createElement('li');
+        listItem.textContent = `${product.name} - ${product.price} грн`;
+        listItem.onclick = () => showProductInfo(product);
+        productList.appendChild(listItem);
+    });
+}
+
+function showProductInfo(product) {
+    const infoContent = document.getElementById('info-content');
+    infoContent.innerHTML = `
+        <p><strong>Назва:</strong> ${product.name}</p>
+        <p><strong>Ціна:</strong> ${product.price} грн</p>
+        <button id="btn" onclick="buyProduct('${product.name}')">Купити</button>
+    `;
+}
+
+function buyProduct(productName) {
+    alert(`Ви купили "${productName}" Дякую! Приємного користування.`);
+    showProducts(); 
+}
+
+</script>
+
+</body>
+</html>
+
+
+
